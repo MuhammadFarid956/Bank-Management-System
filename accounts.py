@@ -1,30 +1,28 @@
-from system_operations import Account, System
+from system_operations import System
+
+# FILENAME = "accounts.txt"
 
 class Accounts:
-    def __init__(self):
+    def __init__(self, account_name, initial_deposit):
+        self.acc_num = System.gen_acc_num()
+        self.acc_name = account_name
+        self.acc_balance = initial_deposit
         self.accounts = []
-    # def __init__(self, name, initial_deposit):
-    #     self.name = name
-    #     self.balance = initial_deposit
-    #     self.account_number = self.generate_account_number()
-    #     print(f"Account for {self.name} created successfully.")
-    #     print(f"Your Number is: {self.account_number}")
-    #
-    # def generate_account_number(self):
-    #     # Simple generate a 10-digit account number
-    #     return ''.join([str(random.randint(0,9)) for _ in range(10)])
 
-    def create_acc(self, acc_name, acc_balance):
-        new_acc_num = System.gen_acc_num()
-        new_acc = Account(new_acc_num, acc_name, acc_balance)
+    def to_list(self):
+        return [self.acc_num, self.acc_name, self.acc_balance]
+
+    def create_acc(self, new_acc_num):
+        new_acc_num = self.acc_num
+        new_acc = self.to_list()
         self.accounts.append(new_acc)
         System.save_data()
         return new_acc
 
     def deposit(self, amount):
         if amount > 0:
-            self.balance += amount
-            print(f"Deposited ${amount}. New balance : ${self.balance}")
+            self.acc_balance += amount
+            print(f"Deposited ${amount}. New balance : ${self.acc_balance}")
         else:
             print("Invalid deposit amount.")
 
@@ -42,3 +40,17 @@ class Accounts:
         print("\n--- Account Details ---")
         print(f"Account Holder : {self.name}\nAccount Number : {self.account_number}\nBalance : {self.balance}")
         print("-" * 30)
+
+    # def __init__(self, name, initial_deposit):
+    #     self.name = name
+    #     self.balance = initial_deposit
+    #     self.account_number = self.generate_account_number()
+    #     print(f"Account for {self.name} created successfully.")
+    #     print(f"Your Number is: {self.account_number}")
+    #
+    # def generate_account_number(self):
+    #     # Simple generate a 10-digit account number
+    #     return ''.join([str(random.randint(0,9)) for _ in range(10)])
+if __name__ == "__main__":
+    user = Accounts
+    user.create_acc()
