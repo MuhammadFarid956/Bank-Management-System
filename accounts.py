@@ -1,10 +1,10 @@
-from system_operations import System
+from operational import Utility
 
 # FILENAME = "accounts.txt"
 
 class Accounts:
     def __init__(self, account_name, initial_deposit):
-        self.acc_num = System.gen_acc_num()
+        self.acc_num = Utility.gen_acc_num()
         self.acc_name = account_name
         self.acc_balance = initial_deposit
         self.accounts = []
@@ -13,10 +13,10 @@ class Accounts:
         return [self.acc_num, self.acc_name, self.acc_balance]
 
     def create_acc(self, new_acc_num):
-        new_acc_num = self.acc_num
+        self.acc_num = new_acc_num
         new_acc = self.to_list()
         self.accounts.append(new_acc)
-        System.save_data()
+        Utility.save_data()
         return new_acc
 
     def deposit(self, amount):
@@ -53,4 +53,4 @@ class Accounts:
     #     return ''.join([str(random.randint(0,9)) for _ in range(10)])
 if __name__ == "__main__":
     user = Accounts
-    user.create_acc()
+    user.create_acc('')
