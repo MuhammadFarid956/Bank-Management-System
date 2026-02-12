@@ -1,16 +1,25 @@
-import random
+from system_operations import Account, System
 
-class Account:
-    def __init__(self, name, initial_deposit):
-        self.name = name
-        self.balance = initial_deposit
-        self.account_number = self.generate_account_number()
-        print(f"Account for {self.name} created successfully.")
-        print(f"Your Number is: {self.account_number}")
+class Accounts:
+    def __init__(self):
+        self.accounts = []
+    # def __init__(self, name, initial_deposit):
+    #     self.name = name
+    #     self.balance = initial_deposit
+    #     self.account_number = self.generate_account_number()
+    #     print(f"Account for {self.name} created successfully.")
+    #     print(f"Your Number is: {self.account_number}")
+    #
+    # def generate_account_number(self):
+    #     # Simple generate a 10-digit account number
+    #     return ''.join([str(random.randint(0,9)) for _ in range(10)])
 
-    def generate_account_number(self):
-        # Simple generate a 10-digit account number
-        return ''.join([str(random.randint(0,9)) for _ in range(10)])
+    def create_acc(self, acc_name, acc_balance):
+        new_acc_num = System.gen_acc_num()
+        new_acc = Account(new_acc_num, acc_name, acc_balance)
+        self.accounts.append(new_acc)
+        System.save_data()
+        return new_acc
 
     def deposit(self, amount):
         if amount > 0:

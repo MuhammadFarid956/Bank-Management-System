@@ -1,4 +1,44 @@
-from accounts import  Account
+import csv
+import os
+import random
+
+
+FILENAME = "accounts_data.csv"
+
+class Account:
+    def __init__(self, account_number, account_name, account_balance):
+        self.acc_num = account_number
+        self.acc_name = account_name
+        self.acc_balance = account_balance
+
+    def to_list(self):
+        return [self.acc_num, self.acc_name, self.acc_balance]
+
+class System:
+    def __init__(self):
+        self.accounts = []
+        self.load_data()
+
+    def load_data(self):
+        if not os.path.exists(FILENAME):
+            return
+
+        try:
+            with open(FILENAME, 'r') as file:
+                reader = csv.reader(file)
+                self.accounts = [Account(*row) for row in reader if row]
+        except FileNotFoundError:
+            print("File not found.")
+
+    def save_data(self):
+        try:
+            with open(FILENAME, 'w', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerows(acc.to_list() for acc in self.accounts)
+        except FileNotFoundError:
+            print("File not found. Can't save data.")
+    def gen_acc_num(self):
+        return ''.join(str(random.randint(0,9) for _ in range (10)))
 
 class Bank:
     def __init__(self):
@@ -28,39 +68,3 @@ class Bank:
             print(f"account closed successfully.")
         else:
             print("Account not found.")
-
-    def perform_transaction(self):
-        account_number = input("Enter your account number : ")
-        account = self.find_account(account_number)
-
-        if not account:
-            print("Account not found")
-            return
-
-        while True:
-            print("\nTransaction Menu:")
-            print("1. Deposit : ")
-            print("2. Withdraw : ")
-            print("3. Check Balance : ")
-            print("4. View Account Details : ")
-            print("5. Exit Transaction Menu : ")
-
-            try:
-                choice = int(input("Enter your choice (1-5) : "))
-
-                if choice == 1:
-                    amount = float(input("Enter amount to deposit : $"))
-                    account.deposit(amount)
-                elif choice == 2:
-                    amount = float(input("Enter amount to withdraw : $"))
-                    account.withdraw(amount)
-                elif choice == 3:
-                    account.check_balance()
-                elif choice == 4:
-                    account.display_details()
-                elif choice == 5:
-                    break
-                else:
-                    print("Invalid choice. Please select a valid option.")
-            except ValueError:
-                print("Invalid input.Please enter a number")
