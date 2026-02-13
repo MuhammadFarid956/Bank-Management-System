@@ -24,10 +24,10 @@ class BankStorage:
             return{}
 
     @staticmethod
-    def save_data(accounts_dict):
+    def save_data(account_dict):
         try:
             with open(FILENAME, 'w', newline='') as file:
                 writer = csv.writer(file)
-                writer.writerows(acc.to_list() for acc in accounts_dict.values())
+                writer.writerows(acc.to_list() for acc in account_dict.values())
         except Exception as e:
             print(f"File not found. Can't save data: {e}")
