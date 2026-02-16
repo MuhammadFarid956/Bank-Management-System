@@ -58,8 +58,10 @@ class BankSystem:
                     print("Error: Invalid Input")
             elif choice == "3":
                 try:
-                    recipient = input("Enter Recipient Number : ")
+                    recipient_num = input("Enter Recipient Number : ")
                     amount = float(input("Enter Transfer Amount : $"))
+                    recipient = self.accounts.get(recipient_num)
+
                     if acc.transfer(amount, recipient):
                         operational.BankStorage.save_data(self.accounts)
                     else:

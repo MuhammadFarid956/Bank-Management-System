@@ -25,7 +25,7 @@ class Account:
         print("Invalid withdrawal amount or insufficient founds")
         return False
 
-    def transfer(self, recipient, amount):
+    def transfer(self, amount, recipient):
         if recipient == self:
             print("Error: Can't transfer to own account")
             return
