@@ -33,7 +33,7 @@ class BankSystem:
         while True:
             print(f"\nWelcome, {acc.acc_name}")
             print(f"Balance : {acc.acc_balance:.2f}")
-            print("\n1. Deposit\n2. Withdraw\n3. Transfer\n4. Exit")
+            print("\n1. Deposit\n2. Withdraw\n3. Transfer\n4. Back")
 
             choice = input("Enter Choice : ")
 
@@ -67,7 +67,7 @@ class BankSystem:
                     else:
                         print("Recipient Number Not Found")
                 except ValueError:
-                    print(("Error: Invalid Input"))
+                    print("Error: Invalid Input")
             elif choice == "4":
                 break
             else:
@@ -90,5 +90,3 @@ class BankSystem:
             else:
                 print("Invalid Input.")
         return select
-
-
