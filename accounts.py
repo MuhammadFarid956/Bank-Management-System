@@ -15,7 +15,7 @@ class Account:
         if amount > 0:
             self.acc_balance += amount
             print(f"Deposited ${amount}. New balance : ${self.acc_balance:.2f}")
-            operational.BankStorage.log_transaction("DEPOSIT", self.acc_num, amount)
+            # operational.BankStorage.log_transaction("DEPOSIT", self.acc_num, amount)
             return True
         print("Invalid deposit amount.")
         return False
@@ -24,7 +24,7 @@ class Account:
         if 0 < amount < self.acc_balance:
             self.acc_balance -= amount
             print(f"Withdrew ${amount}. New balance : ${self.acc_balance:.2f}")
-            operational.BankStorage.log_transaction("WITHDRAW", self.acc_num, amount)
+            # operational.BankStorage.log_transaction("WITHDRAW", self.acc_num, amount)
             return True
         print("Invalid withdrawal amount or insufficient founds")
         return False
@@ -39,7 +39,7 @@ class Account:
         if self.withdraw(amount):
             recipient.deposit(amount)
             print(f"Transfer ${amount} to {recipient.acc_name} successful")
-            operational.BankStorage.log_transaction("TRANSFER_OUT", self.acc_num, amount)
+            # operational.BankStorage.log_transaction("TRANSFER_OUT", self.acc_num, amount)
             return True
         else:
             print("Transfer Failed")
